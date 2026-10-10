@@ -1,228 +1,38 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Elite Sign Services</title>
-
-  <style>
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: Arial, sans-serif;
-      background: #f4f6f8;
-      margin: 0;
-      padding: 30px 15px;
-    }
-
-    .container {
-      max-width: 600px;
-      margin: auto;
-      padding: 30px;
-      background: white;
-      border-radius: 10px;
-      box-shadow: 0 3px 12px #00000015;
-    }
-
-    h1 {
-      text-align: center;
-      font-size: 24px;
-      margin-bottom: 30px;
-    }
-
-    .question {
-      padding: 18px 0;
-      border-bottom: 1px solid #ddd;
-    }
-
-    .question-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 15px;
-    }
-
-    .options {
-      display: flex;
-      gap: 15px;
-    }
-
-    label {
-      cursor: pointer;
-    }
-
-    input[type="radio"] {
-      accent-color: #2563eb;
-    }
-
-    input[type="number"] {
-      padding: 9px;
-      width: 100px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-    }
-
-    .follow-up {
-      margin-top: 15px;
-      padding-left: 20px;
-    }
-
-    .hidden {
-      display: none;
-    }
-
-    button {
-      width: 100%;
-      margin-top: 25px;
-      padding: 13px;
-      background: #2563eb;
-      color: white;
-      border: none;
-      border-radius: 6px;
-      font-size: 16px;
-      cursor: pointer;
-    }
-
-    button:hover {
-      background: #1d4ed8;
-    }
-
-    @media (max-width: 450px) {
-      .container {
-        padding: 20px;
-      }
-
-      h1 {
-        font-size: 20px;
-      }
-    }
-  </style>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Elite Sign Services | Project Questionnaire</title>
+<style>
+:root{font-family:Arial,Helvetica,sans-serif;color:#182436;background:#f3f6fa}*{box-sizing:border-box}body{margin:0;padding:30px 14px}.container{max-width:720px;margin:auto;background:white;border-radius:14px;box-shadow:0 5px 24px #172a4417;padding:28px}h1{text-align:center;font-size:clamp(20px,4vw,28px);margin:0 0 8px}p.subtitle{text-align:center;color:#667085;margin:0 0 26px}fieldset{border:0;border-top:1px solid #e5e9ef;margin:0;padding:22px 0}legend{font-weight:700;font-size:18px;padding:0 10px 0 0}.line{display:flex;align-items:center;justify-content:space-between;gap:14px;margin:12px 0;flex-wrap:wrap}.choices{display:flex;gap:16px}.choices label{white-space:nowrap;cursor:pointer}input[type=radio]{accent-color:#2563eb}.details{background:#f7f9fc;border-radius:8px;padding:14px 16px;margin:12px 0 0 0}.details[hidden]{display:none}.field{margin:12px 0}.field label{display:block;font-weight:600;font-size:14px;margin-bottom:6px}input[type=number],select{width:100%;max-width:290px;border:1px solid #cbd5e1;border-radius:7px;padding:10px;font:inherit;background:white}.size{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.size input{width:95px}.size label{font-size:14px}.buttons{display:flex;gap:12px;flex-wrap:wrap;margin-top:20px}button{background:#2563eb;color:white;border:0;border-radius:8px;padding:13px 18px;font:inherit;cursor:pointer}button.secondary{background:#e8eef7;color:#203550}button:hover{filter:brightness(.95)}#status{font-size:14px;color:#344054;margin-top:14px;white-space:pre-wrap}@media(max-width:480px){.container{padding:19px}.line{align-items:flex-start}.choices{gap:12px}}
+</style>
 </head>
-
-<body>
-  <div class="container">
-    <h1>ELITE SIGN SERVICES, INC.</h1>
-
-    <form id="signForm">
-
-      <div class="question">
-        <div class="question-row">
-          <span>Interior Signs?</span>
-          <div class="options">
-            <label><input type="radio" name="interior" value="Yes"> Yes</label>
-            <label><input type="radio" name="interior" value="No"> No</label>
-          </div>
-        </div>
-
-        <div id="interiorDetails" class="follow-up hidden">
-          <label for="quantity">Quantity:</label>
-          <input type="number" id="quantity" min="1">
-        </div>
-      </div>
-
-      <div class="question">
-        <div class="question-row">
-          <span>Vinyl?</span>
-          <div class="options">
-            <label><input type="radio" name="vinyl" value="Yes"> Yes</label>
-            <label><input type="radio" name="vinyl" value="No"> No</label>
-          </div>
-        </div>
-      </div>
-
-      <div class="question">
-        <div class="question-row">
-          <span>Wall Signs?</span>
-          <div class="options">
-            <label><input type="radio" name="wall" value="Yes"> Yes</label>
-            <label><input type="radio" name="wall" value="No"> No</label>
-          </div>
-        </div>
-      </div>
-
-      <div class="question">
-        <div class="question-row">
-          <span>Monument Signs?</span>
-          <div class="options">
-            <label><input type="radio" name="monument" value="Yes"> Yes</label>
-            <label><input type="radio" name="monument" value="No"> No</label>
-          </div>
-        </div>
-
-        <div id="foundationDetails" class="follow-up hidden">
-          <div class="question-row">
-            <span>New Foundation?</span>
-            <div class="options">
-              <label><input type="radio" name="foundation" value="Yes"> Yes</label>
-              <label><input type="radio" name="foundation" value="No"> No</label>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="question">
-        <div class="question-row">
-          <span>Illuminated?</span>
-          <div class="options">
-            <label><input type="radio" name="illuminated" value="Yes"> Yes</label>
-            <label><input type="radio" name="illuminated" value="No"> No</label>
-          </div>
-        </div>
-      </div>
-
-      <button type="submit">Submit</button>
-    </form>
-  </div>
-
-  <script>
-    const form = document.getElementById("signForm");
-
-    function toggleDetails(name, detailId) {
-      const selected = form.querySelector(
-        `input[name="${name}"]:checked`
-      );
-
-      const detail = document.getElementById(detailId);
-      const show = selected && selected.value === "Yes";
-
-      detail.classList.toggle("hidden", !show);
-
-      if (!show) {
-        detail.querySelectorAll("input").forEach(input => {
-          if (input.type === "radio") input.checked = false;
-          else input.value = "";
-        });
-      }
-    }
-
-    form.querySelectorAll('input[name="interior"]').forEach(input => {
-      input.addEventListener("change", () => {
-        toggleDetails("interior", "interiorDetails");
-      });
-    });
-
-    form.querySelectorAll('input[name="monument"]').forEach(input => {
-      input.addEventListener("change", () => {
-        toggleDetails("monument", "foundationDetails");
-      });
-    });
-
-    form.addEventListener("submit", function(event) {
-      event.preventDefault();
-
-      const data = new FormData(form);
-      const responses = Object.fromEntries(data.entries());
-
-      if (responses.interior === "Yes") {
-        responses.quantity = document.getElementById("quantity").value;
-      }
-
-      console.log("Form Responses:", responses);
-      alert("Form submitted successfully!");
-    });
-  </script>
-</body>
-</html>
+<body><main class="container">
+<h1>ELITE SIGN SERVICES, INC.</h1><p class="subtitle">Sign Project Questionnaire</p>
+<form id="signForm">
+<fieldset><legend>Interior Signs</legend><div class="line"><span>Interior Signs?</span><div class="choices"><label><input type="radio" name="interior" value="Yes"> Yes</label><label><input type="radio" name="interior" value="No"> No</label></div></div>
+<div class="details" data-for="interior" hidden>
+<div class="line"><span>Illuminated?</span><div class="choices"><label><input type="radio" name="interiorIlluminated" value="Yes"> Yes</label><label><input type="radio" name="interiorIlluminated" value="No"> No</label></div></div>
+<div class="field"><label for="interiorLetters">How many letters?</label><input id="interiorLetters" name="interiorLetters" type="number" min="0" step="1" placeholder="Number of letters"></div>
+<div class="field"><label>Size of letters</label><div class="size"><input aria-label="Interior letter size feet" name="interiorFeet" type="number" min="0" placeholder="Feet"><label>ft</label><input aria-label="Interior letter size inches" name="interiorInches" type="number" min="0" step="any" placeholder="Inches"><label>in</label></div></div>
+</div></fieldset>
+<fieldset><legend>Vinyl</legend><div class="line"><span>Vinyl?</span><div class="choices"><label><input type="radio" name="vinyl" value="Yes"> Yes</label><label><input type="radio" name="vinyl" value="No"> No</label></div></div>
+<div class="details" data-for="vinyl" hidden><div class="field"><label for="vinylType">Type</label><select id="vinylType" name="vinylType"><option value="">Select type</option><option>Door</option><option>Window</option></select></div><div class="field"><label>Size</label><div class="size"><input aria-label="Vinyl size feet" name="vinylFeet" type="number" min="0" placeholder="Feet"><label>ft</label><input aria-label="Vinyl size inches" name="vinylInches" type="number" min="0" step="any" placeholder="Inches"><label>in</label></div></div></div></fieldset>
+<fieldset><legend>Wall Signs</legend><div class="line"><span>Wall Signs?</span><div class="choices"><label><input type="radio" name="wall" value="Yes"> Yes</label><label><input type="radio" name="wall" value="No"> No</label></div></div>
+<div class="details" data-for="wall" hidden><div class="field"><label for="wallType">Type</label><select id="wallType" name="wallType"><option value="">Select type</option><option>Cabinet</option><option>Channel Letters</option><option>FCO</option><option>Raceway</option></select></div><div class="field"><label for="wallQty">Quantity</label><input id="wallQty" name="wallQty" type="number" min="1" step="1" placeholder="Quantity"></div><div class="line"><span>Illuminated?</span><div class="choices"><label><input type="radio" name="wallIlluminated" value="Yes"> Yes</label><label><input type="radio" name="wallIlluminated" value="No"> No</label></div></div><div class="field"><label>Size of letters</label><div class="size"><input aria-label="Wall letter size feet" name="wallFeet" type="number" min="0" placeholder="Feet"><label>ft</label><input aria-label="Wall letter size inches" name="wallInches" type="number" min="0" step="any" placeholder="Inches"><label>in</label></div></div></div></fieldset>
+<fieldset><legend>Monument Signs</legend><div class="line"><span>Monument Signs?</span><div class="choices"><label><input type="radio" name="monument" value="Yes"> Yes</label><label><input type="radio" name="monument" value="No"> No</label></div></div>
+<div class="details" data-for="monument" hidden><div class="line"><span>Replace foundation?</span><div class="choices"><label><input type="radio" name="replaceFoundation" value="Yes"> Yes</label><label><input type="radio" name="replaceFoundation" value="No"> No</label></div></div><div class="field" id="foundationTypeWrap" hidden><label for="foundationType">Foundation type</label><select id="foundationType" name="foundationType"><option value="">Select type</option><option>Rebar</option><option>Concrete</option></select></div><div class="field"><label>Size</label><div class="size"><input aria-label="Monument size feet" name="monumentFeet" type="number" min="0" placeholder="Feet"><label>ft</label><input aria-label="Monument size inches" name="monumentInches" type="number" min="0" step="any" placeholder="Inches"><label>in</label></div></div><div class="line"><span>Illuminated?</span><div class="choices"><label><input type="radio" name="monumentIlluminated" value="Yes"> Yes</label><label><input type="radio" name="monumentIlluminated" value="No"> No</label></div></div></div></fieldset>
+<fieldset><legend>Project Requirements</legend>
+<div class="line"><span>Permit Required?</span><div class="choices"><label><input type="radio" name="permit" value="Yes"> Yes</label><label><input type="radio" name="permit" value="No"> No</label></div></div>
+<div class="line"><span>Survey Needed?</span><div class="choices"><label><input type="radio" name="survey" value="Yes"> Yes</label><label><input type="radio" name="survey" value="No"> No</label></div></div>
+<div class="line"><span>Night Work / After Hours?</span><div class="choices"><label><input type="radio" name="nightWork" value="Yes"> Yes</label><label><input type="radio" name="nightWork" value="No"> No</label></div></div>
+<div class="field"><label for="equipment">Equipment Required</label><select id="equipment" name="equipment"><option value="">Select equipment</option><option>Scissor Lift</option><option>Boom Lift</option><option>Crane</option><option>None</option></select></div></fieldset>
+<div class="buttons"><button type="submit">Copy Responses</button><button type="reset" class="secondary">Clear Form</button></div><div id="status" role="status" aria-live="polite"></div>
+</form></main>
+<script>
+const form=document.getElementById('signForm');const status=document.getElementById('status');
+function selected(name){return form.querySelector(`input[name="${name}"]:checked`)?.value||''}
+function update(){for(const section of form.querySelectorAll('[data-for]')){const show=selected(section.dataset.for)==='Yes';section.hidden=!show;section.querySelectorAll('input,select').forEach(el=>{el.disabled=!show})}const foundation=document.getElementById('foundationTypeWrap');const showFoundation=selected('monument')==='Yes'&&selected('replaceFoundation')==='Yes';foundation.hidden=!showFoundation;foundation.querySelector('select').disabled=!showFoundation}
+form.addEventListener('change',update);form.addEventListener('reset',()=>{setTimeout(()=>{update();status.textContent=''},0)});update();
+form.addEventListener('submit',async e=>{e.preventDefault();const data=new FormData(form);const lines=['ELITE SIGN SERVICES, INC. — PROJECT QUESTIONNAIRE',''];for(const [key,value] of data.entries()){if(value.trim())lines.push(`${key.replace(/([A-Z])/g,' $1').replace(/^./,c=>c.toUpperCase())}: ${value}`)}const output=lines.join('\n');try{await navigator.clipboard.writeText(output);status.textContent='Responses copied to clipboard. You can paste them into an email or document.'}catch{status.textContent='Copy the responses below:\n\n'+output}});
+</script></body></html>
