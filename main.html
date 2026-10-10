@@ -1,0 +1,228 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Elite Sign Services</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f6f8;
+      margin: 0;
+      padding: 30px 15px;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: auto;
+      padding: 30px;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 3px 12px #00000015;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 24px;
+      margin-bottom: 30px;
+    }
+
+    .question {
+      padding: 18px 0;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .question-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .options {
+      display: flex;
+      gap: 15px;
+    }
+
+    label {
+      cursor: pointer;
+    }
+
+    input[type="radio"] {
+      accent-color: #2563eb;
+    }
+
+    input[type="number"] {
+      padding: 9px;
+      width: 100px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    .follow-up {
+      margin-top: 15px;
+      padding-left: 20px;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    button {
+      width: 100%;
+      margin-top: 25px;
+      padding: 13px;
+      background: #2563eb;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #1d4ed8;
+    }
+
+    @media (max-width: 450px) {
+      .container {
+        padding: 20px;
+      }
+
+      h1 {
+        font-size: 20px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>ELITE SIGN SERVICES, INC.</h1>
+
+    <form id="signForm">
+
+      <div class="question">
+        <div class="question-row">
+          <span>Interior Signs?</span>
+          <div class="options">
+            <label><input type="radio" name="interior" value="Yes"> Yes</label>
+            <label><input type="radio" name="interior" value="No"> No</label>
+          </div>
+        </div>
+
+        <div id="interiorDetails" class="follow-up hidden">
+          <label for="quantity">Quantity:</label>
+          <input type="number" id="quantity" min="1">
+        </div>
+      </div>
+
+      <div class="question">
+        <div class="question-row">
+          <span>Vinyl?</span>
+          <div class="options">
+            <label><input type="radio" name="vinyl" value="Yes"> Yes</label>
+            <label><input type="radio" name="vinyl" value="No"> No</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="question">
+        <div class="question-row">
+          <span>Wall Signs?</span>
+          <div class="options">
+            <label><input type="radio" name="wall" value="Yes"> Yes</label>
+            <label><input type="radio" name="wall" value="No"> No</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="question">
+        <div class="question-row">
+          <span>Monument Signs?</span>
+          <div class="options">
+            <label><input type="radio" name="monument" value="Yes"> Yes</label>
+            <label><input type="radio" name="monument" value="No"> No</label>
+          </div>
+        </div>
+
+        <div id="foundationDetails" class="follow-up hidden">
+          <div class="question-row">
+            <span>New Foundation?</span>
+            <div class="options">
+              <label><input type="radio" name="foundation" value="Yes"> Yes</label>
+              <label><input type="radio" name="foundation" value="No"> No</label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="question">
+        <div class="question-row">
+          <span>Illuminated?</span>
+          <div class="options">
+            <label><input type="radio" name="illuminated" value="Yes"> Yes</label>
+            <label><input type="radio" name="illuminated" value="No"> No</label>
+          </div>
+        </div>
+      </div>
+
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+
+  <script>
+    const form = document.getElementById("signForm");
+
+    function toggleDetails(name, detailId) {
+      const selected = form.querySelector(
+        `input[name="${name}"]:checked`
+      );
+
+      const detail = document.getElementById(detailId);
+      const show = selected && selected.value === "Yes";
+
+      detail.classList.toggle("hidden", !show);
+
+      if (!show) {
+        detail.querySelectorAll("input").forEach(input => {
+          if (input.type === "radio") input.checked = false;
+          else input.value = "";
+        });
+      }
+    }
+
+    form.querySelectorAll('input[name="interior"]').forEach(input => {
+      input.addEventListener("change", () => {
+        toggleDetails("interior", "interiorDetails");
+      });
+    });
+
+    form.querySelectorAll('input[name="monument"]').forEach(input => {
+      input.addEventListener("change", () => {
+        toggleDetails("monument", "foundationDetails");
+      });
+    });
+
+    form.addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      const data = new FormData(form);
+      const responses = Object.fromEntries(data.entries());
+
+      if (responses.interior === "Yes") {
+        responses.quantity = document.getElementById("quantity").value;
+      }
+
+      console.log("Form Responses:", responses);
+      alert("Form submitted successfully!");
+    });
+  </script>
+</body>
+</html>
