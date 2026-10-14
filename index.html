@@ -5,11 +5,13 @@
 <title>Elite Sign Services | Project Questionnaire</title>
 <style>
 :root{font-family:Arial,Helvetica,sans-serif;color:#182436;background:#f3f6fa}*{box-sizing:border-box}body{margin:0;padding:30px 14px}.container{max-width:720px;margin:auto;background:white;border-radius:14px;box-shadow:0 5px 24px #172a4417;padding:28px}h1{text-align:center;font-size:clamp(20px,4vw,28px);margin:0 0 8px}p.subtitle{text-align:center;color:#667085;margin:0 0 26px}fieldset{border:0;border-top:1px solid #e5e9ef;margin:0;padding:22px 0}legend{font-weight:700;font-size:18px;padding:0 10px 0 0}.line{display:flex;align-items:center;justify-content:space-between;gap:14px;margin:12px 0;flex-wrap:wrap}.choices{display:flex;gap:16px}.choices label{white-space:nowrap;cursor:pointer}input[type=radio]{accent-color:#2563eb}.details{background:#f7f9fc;border-radius:8px;padding:14px 16px;margin:12px 0 0 0}.details[hidden]{display:none}.field{margin:12px 0}.field label{display:block;font-weight:600;font-size:14px;margin-bottom:6px}input[type=number],select{width:100%;max-width:290px;border:1px solid #cbd5e1;border-radius:7px;padding:10px;font:inherit;background:white}.size{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.size input{width:95px}.size label{font-size:14px}.buttons{display:flex;gap:12px;flex-wrap:wrap;margin-top:20px}button{background:#2563eb;color:white;border:0;border-radius:8px;padding:13px 18px;font:inherit;cursor:pointer}button.secondary{background:#e8eef7;color:#203550}button:hover{filter:brightness(.95)}#status{font-size:14px;color:#344054;margin-top:14px;white-space:pre-wrap}@media(max-width:480px){.container{padding:19px}.line{align-items:flex-start}.choices{gap:12px}}
+
+.project-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:20px 0}.project-fields label{font-size:13px;font-weight:700;display:block;margin-bottom:5px}.project-fields input{width:100%;border:1px solid #cbd5e1;border-radius:7px;padding:10px;font:inherit}.estimate{margin-top:32px;border-top:3px solid #182436;padding-top:20px}.estimate[hidden]{display:none}.estimate h2{text-align:center;font-size:30px;margin:0 0 15px}.estimate-meta{font-size:13px;line-height:1.7;margin-bottom:18px}.table-wrap{overflow-x:auto}.cost-table{border-collapse:collapse;width:100%;font-size:13px;min-width:620px}.cost-table th,.cost-table td{border:1px solid #4b5563;padding:9px 10px;text-align:left}.cost-table th{background:#edf2f7}.cost-table td.num,.cost-table th.num{text-align:right;white-space:nowrap}.cost-table .category td{font-weight:bold;background:#f2f5f9}.cost-table tfoot td{font-weight:700;background:#e6efff;font-size:15px}.estimate-note{font-size:12px;color:#667085;margin-top:12px}.estimate-actions{display:flex;gap:10px;flex-wrap:wrap}.estimate-actions button{width:auto}@media(max-width:500px){.project-fields{grid-template-columns:1fr}}@media print{body{background:white;padding:0}.container{box-shadow:none;max-width:none;padding:0}h1,.subtitle,#signForm{display:none!important}.estimate{border:0;margin:0;padding:0}.estimate-actions{display:none!important}.table-wrap{overflow:visible}.cost-table{min-width:0;font-size:11px}.cost-table th,.cost-table td{padding:7px}}
 </style>
 </head>
 <body><main class="container">
 <h1>ELITE SIGN SERVICES, INC.</h1><p class="subtitle">Sign Project Questionnaire</p>
-<form id="signForm">
+<form id="signForm"><div class="project-fields"><div><label for="projectName">Project Name</label><input id="projectName" name="projectName" placeholder="e.g. Main Street Storefront"></div></div>
 <fieldset><legend>Interior Signs</legend><div class="line"><span>Interior Signs?</span><div class="choices"><label><input type="radio" name="interior" value="Yes"> Yes</label><label><input type="radio" name="interior" value="No"> No</label></div></div>
 <div class="details" data-for="interior" hidden>
 <div class="line"><span>Illuminated?</span><div class="choices"><label><input type="radio" name="interiorIlluminated" value="Yes"> Yes</label><label><input type="radio" name="interiorIlluminated" value="No"> No</label></div></div>
@@ -27,12 +29,61 @@
 <div class="line"><span>Survey Needed?</span><div class="choices"><label><input type="radio" name="survey" value="Yes"> Yes</label><label><input type="radio" name="survey" value="No"> No</label></div></div>
 <div class="line"><span>Night Work / After Hours?</span><div class="choices"><label><input type="radio" name="nightWork" value="Yes"> Yes</label><label><input type="radio" name="nightWork" value="No"> No</label></div></div>
 <div class="field"><label for="equipment">Equipment Required</label><select id="equipment" name="equipment"><option value="">Select equipment</option><option>Scissor Lift</option><option>Boom Lift</option><option>Crane</option><option>None</option></select></div></fieldset>
-<div class="buttons"><button type="submit">Copy Responses</button><button type="reset" class="secondary">Clear Form</button></div><div id="status" role="status" aria-live="polite"></div>
-</form></main>
+<div class="buttons"><button type="button" id="generateEstimate">Generate Cost Estimate</button><button type="submit" class="secondary">Copy Responses</button><button type="reset" class="secondary">Clear Form</button></div><div id="status" role="status" aria-live="polite"></div>
+</form><section class="estimate" id="estimate" hidden aria-live="polite"><h2>Cost Estimate</h2><div id="estimateMeta" class="estimate-meta"></div><div class="table-wrap"><table class="cost-table"><thead><tr><th>Expense / Sign Details</th><th class="num">Quantity</th><th class="num">Unit Cost</th><th class="num">Total Cost</th></tr></thead><tbody id="estimateRows"></tbody><tfoot><tr><td colspan="3">TOTAL ESTIMATED COST</td><td class="num" id="estimateTotal"></td></tr></tfoot></table></div><p class="estimate-note">Illustrative pricing only. Placeholder amounts are not actual quotes. Measurements are recorded for reference; adjust pricing rules before quoting customers.</p><div class="estimate-actions"><button type="button" onclick="window.print()">Print / Save as PDF</button><button type="button" id="copyEstimate" class="secondary">Copy Estimate</button></div></section></main>
 <script>
 const form=document.getElementById('signForm');const status=document.getElementById('status');
 function selected(name){return form.querySelector(`input[name="${name}"]:checked`)?.value||''}
 function update(){for(const section of form.querySelectorAll('[data-for]')){const show=selected(section.dataset.for)==='Yes';section.hidden=!show;section.querySelectorAll('input,select').forEach(el=>{el.disabled=!show})}const foundation=document.getElementById('foundationTypeWrap');const showFoundation=selected('monument')==='Yes'&&selected('replaceFoundation')==='Yes';foundation.hidden=!showFoundation;foundation.querySelector('select').disabled=!showFoundation}
 form.addEventListener('change',update);form.addEventListener('reset',()=>{setTimeout(()=>{update();status.textContent=''},0)});update();
 form.addEventListener('submit',async e=>{e.preventDefault();const data=new FormData(form);const lines=['ELITE SIGN SERVICES, INC. — PROJECT QUESTIONNAIRE',''];for(const [key,value] of data.entries()){if(value.trim())lines.push(`${key.replace(/([A-Z])/g,' $1').replace(/^./,c=>c.toUpperCase())}: ${value}`)}const output=lines.join('\n');try{await navigator.clipboard.writeText(output);status.textContent='Responses copied to clipboard. You can paste them into an email or document.'}catch{status.textContent='Copy the responses below:\n\n'+output}});
+
+// All amounts below are PLACEHOLDERS in USD. Edit this object to set real prices.
+const PRICES={interiorLetter:85,interiorIllumination:45,vinylDoor:160,vinylWindow:220,vinylOther:190,wallCabinet:1600,wallChannel:2300,wallFCO:950,wallRaceway:1750,wallOther:1400,wallIllumination:450,monument:5200,monumentIllumination:850,foundationRebar:900,foundationConcrete:1500,permit:350,survey:600,nightWork:450,scissorLift:300,boomLift:650,crane:1400};
+const money=n=>new Intl.NumberFormat('en-US',{style:'currency',currency:'USD'}).format(n);
+const escapeHtml=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const value=(name)=>form.elements.namedItem(name)?.value||'';
+const qty=(name,fallback=1)=>{const n=Number(value(name));return Number.isFinite(n)&&n>0?n:fallback};
+const size=(prefix)=>{const ft=value(prefix+'Feet'),inch=value(prefix+'Inches');return ft||inch?`${ft||0} ft ${inch||0} in`:'Size not provided'};
+let lastRows=[];
+function buildEstimate(){
+ const rows=[];const add=(category,detail,quantity,unit)=>rows.push({category,detail,quantity,unit,total:quantity*unit});
+ if(selected('interior')==='Yes'){
+  const n=qty('interiorLetters');add('Interior Signs',`Interior letters (${size('interior')})`,n,PRICES.interiorLetter,'Fabrication / installation');
+  if(selected('interiorIlluminated')==='Yes')add('Interior Signs','Illuminated interior letters',n,PRICES.interiorIllumination,'Lighting allowance');
+ }
+ if(selected('vinyl')==='Yes'){
+  const type=value('vinylType');const price=type==='Door'?PRICES.vinylDoor:type==='Window'?PRICES.vinylWindow:PRICES.vinylOther;
+  add('Vinyl',`${type||'Unspecified'} vinyl (${size('vinyl')})`,1,price,'Vinyl production / application');
+ }
+ if(selected('wall')==='Yes'){
+  const type=value('wallType');const price=({'Cabinet':PRICES.wallCabinet,'Channel letters':PRICES.wallChannel,'FCO':PRICES.wallFCO,'Raceway':PRICES.wallRaceway})[type]??PRICES.wallOther;
+  const n=qty('wallQty');add('Wall Signs',`${type||'Unspecified'} wall sign (${size('wall')})`,n,price,'Sign fabrication / installation');
+  if(selected('wallIlluminated')==='Yes')add('Wall Signs','Wall sign illumination',n,PRICES.wallIllumination,'Lighting allowance');
+ }
+ if(selected('monument')==='Yes'){
+  add('Monument Signs',`Monument sign (${size('monument')})`,1,PRICES.monument,'Sign fabrication / installation');
+  if(selected('replaceFoundation')==='Yes'){
+   const type=value('foundationType');add('Monument Signs',`${type||'Unspecified'} foundation replacement`,1,type==='Rebar'?PRICES.foundationRebar:PRICES.foundationConcrete,'Foundation allowance');
+  }
+  if(selected('monumentIlluminated')==='Yes')add('Monument Signs','Monument illumination',1,PRICES.monumentIllumination,'Lighting allowance');
+ }
+ if(selected('permit')==='Yes')add('Project Services','Permit allowance',1,PRICES.permit,'Permit processing / fees');
+ if(selected('survey')==='Yes')add('Project Services','Survey',1,PRICES.survey,'Site survey');
+ if(selected('nightWork')==='Yes')add('Project Services','After-hours labor',1,PRICES.nightWork,'Night work allowance');
+ const equipment=value('equipment');const ep={'Scissor Lift':PRICES.scissorLift,'Boom Lift':PRICES.boomLift,'Crane':PRICES.crane};
+ if(Object.hasOwn(ep,equipment))add('Equipment',equipment,1,ep[equipment],'Equipment rental allowance');
+ return rows;
+}
+function renderEstimate(){
+ lastRows=buildEstimate();const container=document.getElementById('estimate');
+ const meta=[['Project Name',value('projectName')]];
+ document.getElementById('estimateMeta').innerHTML=meta.map(([k,v])=>`<div><strong>${k}:</strong> ${escapeHtml(v||'—')}</div>`).join('');
+ let prev='';let html='';for(const r of lastRows){if(r.category!==prev){html+=`<tr class="category"><td colspan="4">${escapeHtml(r.category)}</td></tr>`;prev=r.category}html+=`<tr><td>${escapeHtml(r.detail)}</td><td class="num">${r.quantity}</td><td class="num">${money(r.unit)}</td><td class="num">${money(r.total)}</td></tr>`}
+ document.getElementById('estimateRows').innerHTML=html||'<tr><td colspan="4">No sign types or services selected. Complete the questionnaire and generate again.</td></tr>';
+ document.getElementById('estimateTotal').textContent=money(lastRows.reduce((sum,r)=>sum+r.total,0));container.hidden=false;container.scrollIntoView({behavior:'smooth',block:'start'});
+}
+document.getElementById('generateEstimate').addEventListener('click',renderEstimate);
+document.getElementById('copyEstimate').addEventListener('click',async()=>{const lines=['ELITE SIGN SERVICES — COST ESTIMATE',`Project: ${value('projectName')}`, ...lastRows.map(r=>`${r.category} | ${r.detail} | ${r.quantity} × ${money(r.unit)} = ${money(r.total)}`),`TOTAL: ${money(lastRows.reduce((s,r)=>s+r.total,0))}`,'Placeholder prices only'];try{await navigator.clipboard.writeText(lines.join('\n'));status.textContent='Estimate copied to clipboard.'}catch{status.textContent=lines.join('\n')}});
+form.addEventListener('reset',()=>{document.getElementById('estimate').hidden=true;lastRows=[]});
 </script></body></html>
